@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ snippet.name }}{% endblock %}
+
+{% block content %}
+<p>
+  <strong>Language:</strong>
+  {{ snippet.language|title }}
+  </p>
+
+<div class="code_block">
+  {{ snippet.highlighted_code|safe }}
+</div>
+
+<p><a href="{% url snippet_new %}">New Snippet</a></p>
+
+{% endblock %}
