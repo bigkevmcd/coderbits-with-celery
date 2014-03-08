@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from coderbits.forms import SnippetForm
 from coderbits.models import Snippet
-from coderbits.tasks import HighlightSnippetTask
+from coderbits.tasks import highlight_snippet_task
 
 
 def new(request):
@@ -15,7 +15,7 @@ def new(request):
         form = SnippetForm(request.POST)
         if form.is_valid():
             snippet = form.save()
-            HighlightSnippetTask.delay(snippet.id)
+            highlight_snippet_task.delay(snippet.id)
             return HttpResponseRedirect(
                 reverse('snippet_show', kwargs={'snippet_id': snippet.id}))
     else:
